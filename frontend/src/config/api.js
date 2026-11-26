@@ -2,7 +2,7 @@
 import axios from "axios";
 
 const api = axios.create({
-  baseURL: "https://authentication-6w2d.onrender.com/auth",
+  baseURL: "https://backend-eight-tau-btnjjeu2e1.vercel.app/auth",
   withCredentials: true,
   headers: {
     "Content-Type": "application/json",
