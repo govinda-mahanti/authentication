@@ -26,23 +26,22 @@ const issueSession = (user, res) => {
   user.failedAttempts = 0;
   user.lockedUntil = null;
 
-  const payload = {
-    id: user._id.toString(),
-    sessionId: sessionId,
-  };
+  const token = jwt.sign(
+    {
+      id: user._id.toString(),
+      sessionId,
+    },
+    process.env.JWT_SECRET,
+    { expiresIn: "7d" }
+  );
 
-  const token = jwt.sign(payload, process.env.JWT_SECRET, {
-    expiresIn: "7d",
-  });
-
-  const cookieOptions = {
+  res.cookie("token", token, {
     httpOnly: true,
-    secure: process.env.NODE_ENV === "production",
-    sameSite: "lax",
+    secure: true,
+    sameSite: "none",
     maxAge: 7 * 24 * 60 * 60 * 1000,
-  };
-
-  res.cookie("token", token, cookieOptions);
+    path: "/",
+  });
 };
 
 // SIGNUP
