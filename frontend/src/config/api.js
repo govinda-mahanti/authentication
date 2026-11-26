@@ -2,7 +2,7 @@
 import axios from "axios";
 
 const api = axios.create({
-  baseURL: "http://localhost:5000/auth",
+  baseURL: "https://authentication-6w2d.onrender.com/auth",
   withCredentials: true,
   headers: {
     "Content-Type": "application/json",
